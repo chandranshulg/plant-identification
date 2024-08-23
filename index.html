@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Identification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #4caf50;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        #search-bar {
+            margin: 20px auto;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #4caf50;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #plant-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .plant-item {
+            width: 250px;
+            margin: 15px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .plant-item:hover {
+            transform: scale(1.05);
+        }
+
+        .plant-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .plant-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .plant-info h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .plant-info p {
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Plant Identification Website</h1>
+        <p>Identify plants easily with our extensive gallery and detailed information.</p>
+    </header>
+
+    <div id="search-bar">
+        <input type="text" id="searchInput" onkeyup="searchPlants()" placeholder="Search for a plant...">
+    </div>
+
+    <div id="plant-gallery">
+        <div class="plant-item" data-name="Rose">
+            <img src="https://via.placeholder.com/250x200?text=Rose" alt="Rose">
+            <div class="plant-info">
+                <h3>Rose</h3>
+                <p>A beautiful flowering plant known for its vibrant colors and pleasant fragrance.</p>
+            </div>
+        </div>
+        <div class="plant-item" data-name="Sunflower">
+            <img src="https://via.placeholder.com/250x200?text=Sunflower" alt="Sunflower">
+            <div class="plant-info">
+                <h3>Sunflower</h3>
+                <p>Known for its large, bright yellow flowers that resemble the sun.</p>
+            </div>
+        </div>
+        <div class="plant-item" data-name="Lavender">
+            <img src="https://via.placeholder.com/250x200?text=Lavender" alt="Lavender">
+            <div class="plant-info">
+                <h3>Lavender</h3>
+                <p>A fragrant herb used in perfumes, known for its purple flowers.</p>
+            </div>
+        </div>
+        <div class="plant-item" data-name="Cactus">
+            <img src="https://via.placeholder.com/250x200?text=Cactus" alt="Cactus">
+            <div class="plant-info">
+                <h3>Cactus</h3>
+                <p>A succulent plant that thrives in arid conditions, often seen in deserts.</p>
+            </div>
+        </div>
+        <div class="plant-item" data-name="Tulip">
+            <img src="https://via.placeholder.com/250x200?text=Tulip" alt="Tulip">
+            <div class="plant-info">
+                <h3>Tulip</h3>
+                <p>A popular spring flower known for its vibrant colors and unique shape.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Plant Identification | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        function searchPlants() {
+            const input = document.getElementById("searchInput").value.toUpperCase();
+            const plantItems = document.querySelectorAll(".plant-item");
+
+            plantItems.forEach(item => {
+                const plantName = item.getAttribute("data-name").toUpperCase();
+                if (plantName.includes(input)) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
