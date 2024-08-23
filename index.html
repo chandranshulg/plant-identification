@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Identification</title>
     <title>Advanced Plant Identification</title>
     <style>
         body {
@@ -13,37 +12,26 @@
             margin: 0;
             padding: 20px;
         }
+
         header {
             text-align: center;
             padding: 20px;
             background-color: #4caf50;
             color: white;
         }
+
         header h1 {
             margin: 0;
             font-size: 2.5em;
         }
-        #search-bar {
-            margin: 20px auto;
-            max-width: 500px;
-            text-align: center;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #4caf50;
-            border-radius: 5px;
-            outline: none;
-        }
 
-        #filter-bar {
+        #search-bar, #filter-bar, #sort-bar {
             margin: 20px auto;
             max-width: 500px;
             text-align: center;
         }
 
-        select {
+        input[type="text"], select {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -59,6 +47,7 @@
             justify-content: space-around;
             margin-top: 30px;
         }
+
         .plant-item {
             width: 250px;
             margin: 15px;
@@ -73,31 +62,40 @@
         .plant-item:hover {
             transform: scale(1.05);
         }
-        .plant-item img {
+
+        .plant-item .plant-image {
             width: 100%;
             height: 200px;
-            object-fit: cover;
+            background-color: #4caf50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2em;
         }
+
         .plant-info {
             padding: 15px;
             text-align: center;
         }
+
         .plant-info h3 {
             margin: 10px 0;
             font-size: 1.2em;
             color: #333;
         }
+
         .plant-info p {
             color: #777;
             font-size: 0.9em;
         }
+
         footer {
             text-align: center;
             margin-top: 50px;
             color: #555;
         }
 
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -122,23 +120,6 @@
             text-align: center;
         }
 
-        .modal-content img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .modal-content h2 {
-            font-size: 1.8em;
-            margin: 20px 0;
-            color: #333;
-        }
-
-        .modal-content p {
-            font-size: 1em;
-            color: #555;
-        }
-
         .close {
             color: #aaa;
             float: right;
@@ -158,7 +139,6 @@
 <body>
 
     <header>
-        <h1>Plant Identification Website</h1>
         <h1>Advanced Plant Identification Website</h1>
         <p>Identify plants easily with our extensive gallery and detailed information.</p>
     </header>
@@ -177,42 +157,44 @@
         </select>
     </div>
 
+    <div id="sort-bar">
+        <select id="sortBy" onchange="sortPlants()">
+            <option value="name">Sort Alphabetically</option>
+            <option value="type">Sort by Type</option>
+        </select>
+    </div>
+
     <div id="plant-gallery">
-        <div class="plant-item" data-name="Rose">
-        <div class="plant-item" data-name="Rose" data-type="Flowering" onclick="openModal('Rose', 'https://via.placeholder.com/400x300?text=Rose', 'Rose is a beautiful flowering plant known for its vibrant colors and pleasant fragrance.')">
-            <img src="https://via.placeholder.com/250x200?text=Rose" alt="Rose">
+        <div class="plant-item" data-name="Rose" data-type="Flowering" onclick="openModal('Rose', 'Rose is a beautiful flowering plant known for its vibrant colors and pleasant fragrance.')">
+            <div class="plant-image">🌹</div>
             <div class="plant-info">
                 <h3>Rose</h3>
                 <p>A beautiful flowering plant known for its vibrant colors and pleasant fragrance.</p>
             </div>
         </div>
-        <div class="plant-item" data-name="Sunflower">
-        <div class="plant-item" data-name="Sunflower" data-type="Flowering" onclick="openModal('Sunflower', 'https://via.placeholder.com/400x300?text=Sunflower', 'Sunflower is known for its large, bright yellow flowers that resemble the sun.')">
-            <img src="https://via.placeholder.com/250x200?text=Sunflower" alt="Sunflower">
+        <div class="plant-item" data-name="Sunflower" data-type="Flowering" onclick="openModal('Sunflower', 'Sunflower is known for its large, bright yellow flowers that resemble the sun.')">
+            <div class="plant-image">🌻</div>
             <div class="plant-info">
                 <h3>Sunflower</h3>
                 <p>Known for its large, bright yellow flowers that resemble the sun.</p>
             </div>
         </div>
-        <div class="plant-item" data-name="Lavender">
-        <div class="plant-item" data-name="Lavender" data-type="Herb" onclick="openModal('Lavender', 'https://via.placeholder.com/400x300?text=Lavender', 'Lavender is a fragrant herb used in perfumes, known for its purple flowers.')">
-            <img src="https://via.placeholder.com/250x200?text=Lavender" alt="Lavender">
+        <div class="plant-item" data-name="Lavender" data-type="Herb" onclick="openModal('Lavender', 'Lavender is a fragrant herb used in perfumes, known for its purple flowers.')">
+            <div class="plant-image">🌿</div>
             <div class="plant-info">
                 <h3>Lavender</h3>
                 <p>A fragrant herb used in perfumes, known for its purple flowers.</p>
             </div>
         </div>
-        <div class="plant-item" data-name="Cactus">
-        <div class="plant-item" data-name="Cactus" data-type="Succulent" onclick="openModal('Cactus', 'https://via.placeholder.com/400x300?text=Cactus', 'Cactus is a succulent plant that thrives in arid conditions, often seen in deserts.')">
-            <img src="https://via.placeholder.com/250x200?text=Cactus" alt="Cactus">
+        <div class="plant-item" data-name="Cactus" data-type="Succulent" onclick="openModal('Cactus', 'Cactus is a succulent plant that thrives in arid conditions, often seen in deserts.')">
+            <div class="plant-image">🌵</div>
             <div class="plant-info">
                 <h3>Cactus</h3>
                 <p>A succulent plant that thrives in arid conditions, often seen in deserts.</p>
             </div>
         </div>
-        <div class="plant-item" data-name="Tulip">
-        <div class="plant-item" data-name="Tulip" data-type="Flowering" onclick="openModal('Tulip', 'https://via.placeholder.com/400x300?text=Tulip', 'Tulip is a popular spring flower known for its vibrant colors and unique shape.')">
-            <img src="https://via.placeholder.com/250x200?text=Tulip" alt="Tulip">
+        <div class="plant-item" data-name="Tulip" data-type="Flowering" onclick="openModal('Tulip', 'Tulip is a popular spring flower known for its vibrant colors and unique shape.')">
+            <div class="plant-image">🌷</div>
             <div class="plant-info">
                 <h3>Tulip</h3>
                 <p>A popular spring flower known for its vibrant colors and unique shape.</p>
@@ -221,7 +203,6 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 Plant Identification | All Rights Reserved</p>
         <p>&copy; 2024 Advanced Plant Identification | All Rights Reserved</p>
     </footer>
 
@@ -229,7 +210,6 @@
     <div id="plantModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <img id="modalImg" src="" alt="">
             <h2 id="modalTitle"></h2>
             <p id="modalDescription"></p>
         </div>
@@ -239,6 +219,7 @@
         function searchPlants() {
             const input = document.getElementById("searchInput").value.toUpperCase();
             const plantItems = document.querySelectorAll(".plant-item");
+
             plantItems.forEach(item => {
                 const plantName = item.getAttribute("data-name").toUpperCase();
                 if (plantName.includes(input)) {
@@ -263,20 +244,35 @@
             });
         }
 
-        function openModal(name, imgSrc, description) {
+        function sortPlants() {
+            const sortBy = document.getElementById("sortBy").value;
+            const gallery = document.getElementById("plant-gallery");
+            const items = Array.from(document.querySelectorAll(".plant-item"));
+
+            items.sort((a, b) => {
+                if (sortBy === "name") {
+                    return a.getAttribute("data-name").localeCompare(b.getAttribute("data-name"));
+                } else if (sortBy === "type") {
+                    return a.getAttribute("data-type").localeCompare(b.getAttribute("data-type"));
+                }
+            });
+
+            items.forEach(item => gallery.appendChild(item));
+        }
+
+        function openModal(name, description) {
             const modal = document.getElementById("plantModal");
             document.getElementById("modalTitle").innerText = name;
-            document.getElementById("modalImg").src = imgSrc;
             document.getElementById("modalDescription").innerText = description;
             modal.style.display = "block";
         }
 
         function closeModal() {
-            document.getElementById("plantModal").style.display = "none";
+            const modal = document.getElementById("plantModal");
+            modal.style.display = "none";
         }
 
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             const modal = document.getElementById("plantModal");
             if (event.target == modal) {
                 modal.style.display = "none";
